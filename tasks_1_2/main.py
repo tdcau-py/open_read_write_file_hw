@@ -56,5 +56,6 @@ def get_shop_list_by_dishes(dishes: list, persons: int) -> dict:
     return shop_list
 
 
-new_shop_list = get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 4)
-pprint(new_shop_list)
+if __name__ == '__main__':
+    new_shop_list = get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 4)
+    pprint(new_shop_list)
