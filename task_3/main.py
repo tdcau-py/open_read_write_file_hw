@@ -23,7 +23,7 @@ def sorted_writing_file(target_file: str, source_file: str, total_lines_source_f
             write_file.write(f'{file_name}\n{total_lines_source_file}\n{data}\n')
     else:
         with open(target_file, 'w', encoding='utf-8') as write_file:
-            write_file.write(f'{file_name}\n{total_lines_source_file}\n{data}')
+            write_file.write(f'{file_name}\n{total_lines_source_file}\n{data}\n')
 
 
 if __name__ == '__main__':
