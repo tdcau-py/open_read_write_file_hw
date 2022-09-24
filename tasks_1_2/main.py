@@ -50,8 +50,11 @@ def get_shop_list_by_dishes(dishes: list, persons: int) -> dict:
     for dish in dishes:
         if dish in cook_book:
             for item in cook_book[dish]:
-                shop_list[item['ingredient_name']] = {'measure': item['measure'],
-                                                      'quantity': int(item['quantity']) * persons}
+                if item['ingredient_name'] in shop_list:
+                    shop_list[item['ingredient_name']]['quantity'] += int(item['quantity']) * persons
+                else:
+                    shop_list[item['ingredient_name']] = {'measure': item['measure'],
+                                                          'quantity': int(item['quantity']) * persons}
 
     return shop_list
 
