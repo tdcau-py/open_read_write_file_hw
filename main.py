@@ -3,22 +3,25 @@ from typing import List
 import os
 
 
+def group_recipe_dishes(recipes: list, recipes_group_list: list) -> List[list]:
+    """Рекурсивно заполняет список"""
+    if not recipes:
+        return recipes_group_list
+
+    elif '' not in recipes:
+        recipes_group_list.append(list(recipes[:]))
+        recipes.clear()
+        return group_recipe_dishes(recipes, recipes_group_list)
+
+    else:
+        recipes_group_list.append(list(recipes[:recipes.index('')]))
+        return group_recipe_dishes(recipes[recipes.index('') + 1:], recipes_group_list)
+
+
 def read_file(path_to_file: str) -> List[list]:
     """Читает данные из файла и группирует их в списки"""
     with open(path_to_file, encoding='utf-8') as file:
-        recipes = file.read().split('\n')
-
-    recipes_lists = []
-    while recipes:
-        if '' in recipes:
-            recipes_lists.append(list(recipes[:recipes.index('')]))
-            del recipes[0:recipes.index('') + 1]
-
-        else:
-            recipes_lists.append(list(recipes[:]))
-            recipes.clear()
-
-    return recipes_lists
+        return group_recipe_dishes(file.read().split('\n'), [])
 
 
 def get_cook_book() -> dict:
@@ -53,5 +56,5 @@ def get_shop_list_by_dishes(dishes: list, persons: int) -> dict:
     return shop_list
 
 
-new_shop_list = get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+new_shop_list = get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 4)
 pprint(new_shop_list)
